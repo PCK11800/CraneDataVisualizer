@@ -1,5 +1,9 @@
 package userinterface;
 
+import userinterface.components.Functions;
+import userinterface.components.Screenview;
+import userinterface.components.Settings;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -33,10 +37,20 @@ public class Application extends JFrame {
                 (int) (SCREEN_WIDTH / 2) - (APP_WIDTH / 2),
                 (int) (SCREEN_HEIGHT / 2) - (APP_HEIGHT / 2)
         );
-        setResizable(true);
+        setResizable(false);
         getContentPane().setBackground(AppColors.BACKGROUND);
+        getContentPane().setLayout(null);
+
+        initComponents();
 
         pack();
         repaint();
+    }
+
+    private void initComponents()
+    {
+        add(new Screenview());
+        add(new Functions());
+        add(new Settings());
     }
 }

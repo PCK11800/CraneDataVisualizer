@@ -1,4 +1,4 @@
-package userinterface.font;
+package font;
 
 import java.awt.*;
 import java.io.BufferedInputStream;
@@ -12,7 +12,7 @@ public class Inconsolata {
         Font myfontReal = null;
 
         try{
-            InputStream is = new BufferedInputStream(this.getClass().getClassLoader().getResourceAsStream("userinterface/font/Inconsolata.ttf"));
+            InputStream is = new BufferedInputStream(this.getClass().getClassLoader().getResourceAsStream("font/Inconsolata.ttf"));
             myfont = Font.createFont(Font.TRUETYPE_FONT, is);
             myfontReal = myfont.deriveFont(Font.PLAIN, size);
         }catch (Exception e){
