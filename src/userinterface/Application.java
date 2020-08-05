@@ -11,8 +11,8 @@ import java.awt.*;
 public class Application extends JFrame {
 
     static final String APP_VERSION = "0.0.1";
-    static final int APP_WIDTH = 1280;
-    static final int APP_HEIGHT = 720;
+    static int APP_WIDTH = 1280;
+    static int APP_HEIGHT = 720;
     static final double SCREEN_WIDTH = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
     static final double SCREEN_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 
@@ -31,6 +31,13 @@ public class Application extends JFrame {
 
     private void initUI()
     {
+        System.out.println(OSCheck.getOS());
+        if(OSCheck.getOS().equals("WIN"))
+        {
+            APP_WIDTH = APP_WIDTH + 20;
+            APP_HEIGHT = APP_HEIGHT + 45;
+        }
+
         setTitle("Crane Data Visualizer");
         setPreferredSize(new Dimension(APP_WIDTH, APP_HEIGHT));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

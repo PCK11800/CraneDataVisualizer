@@ -4,6 +4,7 @@ import dataextraction.datacomponents.CycleTimeBlock;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import userinterface.AppColors;
+import userinterface.OSCheck;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,8 +27,8 @@ public class Graph extends JFrame {
      * PS: Legend max length: 17 char (incl space)
      */
 
-    static final int APP_WIDTH = 1300;
-    static final int APP_HEIGHT = 840;
+    static int APP_WIDTH = 1300;
+    static int APP_HEIGHT = 840;
     static final double SCREEN_WIDTH = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
     static final double SCREEN_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 
@@ -43,7 +44,7 @@ public class Graph extends JFrame {
     private void initUI()
     {
         setTitle("Cycle Time " + ctb.getBlockName());
-        setPreferredSize(new Dimension(APP_WIDTH, APP_HEIGHT));
+
         setResizable(false);
         getContentPane().setBackground(AppColors.BACKGROUND);
         getContentPane().setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
@@ -51,6 +52,13 @@ public class Graph extends JFrame {
         initDataPanel();
         initChartPanel();
         initPadding();
+
+        if(OSCheck.getOS().equals("WIN"))
+        {
+            APP_WIDTH = APP_WIDTH + 20;
+            APP_HEIGHT = APP_HEIGHT + 45;
+        }
+        setPreferredSize(new Dimension(APP_WIDTH, APP_HEIGHT));
 
         pack();
         repaint();

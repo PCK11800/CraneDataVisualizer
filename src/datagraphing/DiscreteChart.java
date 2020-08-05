@@ -59,15 +59,15 @@ public class DiscreteChart {
         plot.setDomainGridlinesVisible(true);
         plot.setDomainGridlinePaint(AppColors.BORDER);
 
-        plot.getRangeAxis().setLowerBound(0);
-        plot.getRangeAxis().setVisible(true);
-        plot.getRangeAxis().setTickLabelFont(new Inconsolata().getFont(0));
-        plot.getRangeAxis().setAutoRange(false);
-
         plot.getDomainAxis().setLowerBound(0);
         plot.getDomainAxis().setVisible(true);
         plot.getDomainAxis().setTickLabelPaint(AppColors.BORDER);
         plot.getDomainAxis().setTickLabelFont(new Inconsolata().getFont(14));
+
+        plot.getRangeAxis().setLowerBound(0);
+        plot.getRangeAxis().setVisible(true);
+        plot.getRangeAxis().setTickLabelFont(new Inconsolata().getFont(0));
+        plot.getRangeAxis().setAutoRange(false);
         plot.getRangeAxis().setFixedDimension(50);
 
         LegendTitle legend = chart.getLegend();
