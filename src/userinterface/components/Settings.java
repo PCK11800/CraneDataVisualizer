@@ -31,7 +31,7 @@ public class Settings extends JPanel {
     {
         initFileChooser();
         initFilterOptions();
-        initPreviewButton();
+        initPreview();
 
         setLayout(null);
         setVisible(true);
@@ -135,12 +135,17 @@ public class Settings extends JPanel {
         label.setForeground(AppColors.BORDER);
     }
 
-    private void initPreviewButton()
+    private void initPreview()
     {
         AppButton previewButton = new AppButton();
         previewButton.setText("Preview");
         previewButton.setFontSize(20);
-        previewButton.setBounds(0, 200, 550, 70);
+        previewButton.setBounds(280, 200, 270, 70);
         add(previewButton);
+
+        JTextField previewInput = new JTextField();
+        previewInput.setBounds(0, 200, 270, 70);
+        setFieldSettings(previewInput);
+        add(previewInput);
     }
 }
