@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="ExcelStreamingReader">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/ExcelStreamingReader" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/ExcelStreamingReader" recursive="false" />
+  </library>
+</component>
