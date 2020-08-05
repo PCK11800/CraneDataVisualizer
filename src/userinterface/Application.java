@@ -1,5 +1,6 @@
 package userinterface;
 
+import dataextraction.datacomponents.ActiveCycleTimes;
 import userinterface.components.Functions;
 import userinterface.components.Screenview;
 import userinterface.components.Settings;
@@ -9,18 +10,18 @@ import java.awt.*;
 
 public class Application extends JFrame {
 
-    /*
-     * CHANGELOG
-     * v0.0.1
-     *  - Initial Commit
-     *  - Creation of Window Frame
-     */
-
     static final String APP_VERSION = "0.0.1";
     static final int APP_WIDTH = 1280;
     static final int APP_HEIGHT = 720;
     static final double SCREEN_WIDTH = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
     static final double SCREEN_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+
+    public Screenview screenview = new Screenview(this);
+    public Functions functions = new Functions(this);
+    public Settings settings = new Settings(this);
+
+    private ActiveCycleTimes fullACT = null;
+    private ActiveCycleTimes partialACT = null;
 
     public Application()
     {
@@ -49,8 +50,28 @@ public class Application extends JFrame {
 
     private void initComponents()
     {
-        add(new Screenview());
-        add(new Functions());
-        add(new Settings());
+        add(screenview);
+        add(functions);
+        add(settings);
+    }
+
+    public ActiveCycleTimes getFullACT()
+    {
+        return fullACT;
+    }
+
+    public void setFullACT(ActiveCycleTimes act)
+    {
+        this.fullACT = act;
+    }
+
+    public ActiveCycleTimes getPartialACT()
+    {
+        return partialACT;
+    }
+
+    public void setPartialACT(ActiveCycleTimes act)
+    {
+        this.partialACT = act;
     }
 }

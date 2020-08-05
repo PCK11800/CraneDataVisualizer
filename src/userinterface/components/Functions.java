@@ -1,6 +1,7 @@
 package userinterface.components;
 
 import userinterface.AppColors;
+import userinterface.Application;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,11 +14,13 @@ public class Functions extends JPanel {
      * frequency of things occuring etc.
      */
 
+    private Application app;
     private static final int PANEL_WIDTH = 550;
     private static final int PANEL_HEIGHT = 420;
 
-    public Functions()
+    public Functions(Application app)
     {
+        this.app = app;
         initUI();
         setVisible(true);
     }

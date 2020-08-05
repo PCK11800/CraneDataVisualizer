@@ -44,12 +44,15 @@ public class AppButton extends JButton {
                 if (getModel().isPressed()) {
                     setBackground(AppColors.BORDER);
                     setForeground(AppColors.BACKGROUND);
+                    setBorder(BorderFactory.createLineBorder(AppColors.BORDER, 1));
                 } else if (getModel().isRollover()) {
                     setBackground(AppColors.BACKGROUND);
                     setForeground(AppColors.BORDER);
+                    setBorder(BorderFactory.createLineBorder(AppColors.BORDER, 1));
                 } else {
                     setBackground(AppColors.BACKGROUND);
                     setForeground(AppColors.BORDER);
+                    setBorder(BorderFactory.createLineBorder(AppColors.BORDER, 1));
                 }
             }
         });
