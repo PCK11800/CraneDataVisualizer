@@ -17,7 +17,7 @@ public class Application extends JFrame {
      */
 
     static final String APP_VERSION = "0.0.1";
-    static final int APP_WIDTH = 1080;
+    static final int APP_WIDTH = 1280;
     static final int APP_HEIGHT = 720;
     static final double SCREEN_WIDTH = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
     static final double SCREEN_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().getHeight();

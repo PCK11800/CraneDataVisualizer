@@ -13,8 +13,8 @@ public class Screenview extends JPanel {
      * with the cycle time data.
      */
 
-    private static final int PANEL_WIDTH = 600;
-    private static final int PANEL_HEIGHT = 420;
+    private static final int PANEL_WIDTH = 680;
+    private static final int PANEL_HEIGHT = 710;
 
     private JTextArea textArea;
     private JScrollPane scrollPane;
@@ -34,6 +34,7 @@ public class Screenview extends JPanel {
         setVisible(true);
         setBounds(10, 10, PANEL_WIDTH, PANEL_HEIGHT);
         setBackground(AppColors.BACKGROUND);
+        //setBorder(BorderFactory.createLineBorder(AppColors.BORDER, 1));
 
         repaint();
     }

@@ -13,8 +13,8 @@ public class Functions extends JPanel {
      * frequency of things occuring etc.
      */
 
-    private static final int PANEL_WIDTH = 460;
-    private static final int PANEL_HEIGHT = 700;
+    private static final int PANEL_WIDTH = 550;
+    private static final int PANEL_HEIGHT = 420;
 
     public Functions()
     {
@@ -28,7 +28,7 @@ public class Functions extends JPanel {
 
         //setBorder(BorderFactory.createLineBorder(AppColors.BORDER, 1));
         setLayout(new GridLayout(2, 1));
-        setBounds(610, 10, PANEL_WIDTH, PANEL_HEIGHT);
+        setBounds(720, 290, PANEL_WIDTH, PANEL_HEIGHT);
         setBackground(AppColors.BACKGROUND);
 
         repaint();
