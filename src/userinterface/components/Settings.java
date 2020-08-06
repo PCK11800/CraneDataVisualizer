@@ -194,7 +194,11 @@ public class Settings extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int ctbNum = Integer.parseInt(previewInput.getText());
-                new Graph(app.getFullACT().get(ctbNum - 1));
+                if(app.getPartialACT() == null){
+                    new Graph(app.getFullACT().get(ctbNum - 1));
+                }else{
+                    new Graph(app.getPartialACT().get(ctbNum - 1));
+                }
             }
         });
         add(previewButton);

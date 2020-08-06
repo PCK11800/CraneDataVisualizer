@@ -65,6 +65,7 @@ public class DiscreteChart {
         plot.getDomainAxis().setTickLabelFont(new Inconsolata().getFont(14));
 
         plot.getRangeAxis().setLowerBound(0);
+        plot.getRangeAxis().setUpperBound(10);
         plot.getRangeAxis().setVisible(true);
         plot.getRangeAxis().setTickLabelFont(new Inconsolata().getFont(0));
         plot.getRangeAxis().setAutoRange(false);
@@ -77,8 +78,10 @@ public class DiscreteChart {
         legend.setBackgroundPaint(AppColors.BACKGROUND);
         legend.setItemPaint(AppColors.BORDER);
         legend.setSortOrder(SortOrder.DESCENDING);
-        legend.setItemLabelPadding(new RectangleInsets(15, 0, 0, 0));
-        legend.setLegendItemGraphicPadding(new RectangleInsets(15, 0, 0, 0));
+
+        legend.setItemLabelPadding(new RectangleInsets(0, 0, 23.5, 0));
+        legend.setLegendItemGraphicPadding(new RectangleInsets(0, 0, 23.5, 0));
+        legend.setPadding(0, 0, 23.5, 0);
 
         discreteChart = chart;
     }

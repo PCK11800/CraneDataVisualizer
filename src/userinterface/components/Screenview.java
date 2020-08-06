@@ -137,6 +137,8 @@ public class Screenview extends JPanel {
         textArea.setText(row.toString());
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
+
+        repaint();
     }
 
     private String constructRow(int columnLength, String input, boolean last)

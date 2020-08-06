@@ -23,12 +23,10 @@ public class Graph extends JFrame {
      * or 1 value which corresponds to on or off.
      *
      * Thus two different charts.
-     *
-     * PS: Legend max length: 17 char (incl space)
      */
 
-    static int APP_WIDTH = 1300;
-    static int APP_HEIGHT = 840;
+    int APP_WIDTH = 1300;
+    int APP_HEIGHT = 840;
     static final double SCREEN_WIDTH = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
     static final double SCREEN_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 
@@ -43,7 +41,7 @@ public class Graph extends JFrame {
 
     private void initUI()
     {
-        setTitle("Cycle Time " + ctb.getBlockName());
+        setTitle("Cycle " + ctb.getBlockName());
 
         setResizable(false);
         getContentPane().setBackground(AppColors.BACKGROUND);
@@ -51,6 +49,7 @@ public class Graph extends JFrame {
 
         initDataPanel();
         initChartPanel();
+        initDataPanel();
         initPadding();
 
         if(OSCheck.getOS().equals("WIN"))
@@ -67,7 +66,7 @@ public class Graph extends JFrame {
     private void initChartPanel()
     {
         JPanel chartPanel = new JPanel();
-        chartPanel.setPreferredSize(new Dimension(980, APP_HEIGHT));
+        chartPanel.setPreferredSize(new Dimension(1080, APP_HEIGHT));
         //chartPanel.setBorder(BorderFactory.createLineBorder(AppColors.BORDER, 1));
         chartPanel.setBackground(AppColors.BACKGROUND);
         chartPanel.setVisible(true);
@@ -82,10 +81,13 @@ public class Graph extends JFrame {
     private void initDataPanel()
     {
         JPanel dataPanel = new JPanel();
-        dataPanel.setPreferredSize(new Dimension(300, APP_HEIGHT));
+        dataPanel.setPreferredSize(new Dimension(200, APP_HEIGHT));
         //dataPanel.setBorder(BorderFactory.createLineBorder(AppColors.BORDER, 1));
         dataPanel.setBackground(AppColors.BACKGROUND);
         dataPanel.setVisible(true);
+        GridLayout gridLayout = new GridLayout(1, 1);
+        dataPanel.setLayout(gridLayout);
+        initDataArea(dataPanel);
         add(dataPanel);
     }
 
@@ -116,6 +118,12 @@ public class Graph extends JFrame {
         JFreeChart discreteChart = new DiscreteChart(dataset).getDiscreteChart();
         ChartPanel discreteChartPanel = new ChartPanel(discreteChart);
         chartPanel.add(discreteChartPanel);
+    }
+
+    private void initDataArea(JPanel dataPanel)
+    {
+        DataArea dataArea = new DataArea(ctb, dataPanel);
+        dataPanel.add(dataArea);
     }
 
 }
