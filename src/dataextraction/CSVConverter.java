@@ -12,7 +12,7 @@ public class CSVConverter {
     private String savePath;
     private String fileName, saveName;
 
-    public CSVConverter(File csvFile)
+    public CSVConverter(File inputFile)
     {
         this.inputFile = inputFile;
         initConverter();
