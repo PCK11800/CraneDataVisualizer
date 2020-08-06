@@ -109,6 +109,8 @@ public class Graph extends JFrame {
         ContinuousDataset dataset = new ContinuousDataset(ctb);
         JFreeChart continuousChart = new ContinuousChart(dataset).getContinuousChart();
         ChartPanel continuousChartPanel = new ChartPanel(continuousChart);
+        continuousChartPanel.setDomainZoomable(false);
+        continuousChartPanel.setRangeZoomable(false);
         chartPanel.add(continuousChartPanel);
     }
 
@@ -117,6 +119,8 @@ public class Graph extends JFrame {
         DiscreteDataset dataset = new DiscreteDataset(ctb);
         JFreeChart discreteChart = new DiscreteChart(dataset).getDiscreteChart();
         ChartPanel discreteChartPanel = new ChartPanel(discreteChart);
+        discreteChartPanel.setDomainZoomable(false);
+        discreteChartPanel.setRangeZoomable(false);
         chartPanel.add(discreteChartPanel);
     }
 

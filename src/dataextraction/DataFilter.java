@@ -38,13 +38,16 @@ public class DataFilter {
         }
 
         //Filter duration
+        int counter = 1;
         for(CycleTimeBlock ctb : secondFilteredACT) {
             double start = Double.parseDouble(durationStart) * 1.0;
             double end = Double.parseDouble(durationEnd) * 1.0;
 
             if(!(ctb.getDuration() < start) && !(ctb.getDuration() > end))
             {
+                ctb.setName(Integer.toString(counter));
                 thirdFilteredACT.add(ctb);
+                counter++;
             }
         }
 

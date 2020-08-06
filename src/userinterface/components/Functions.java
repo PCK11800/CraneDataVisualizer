@@ -1,10 +1,15 @@
 package userinterface.components;
 
+import functions.hoisttier.HoistTier;
+import functions.hoisttier.HoistTierSettings;
 import userinterface.AppColors;
 import userinterface.Application;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.concurrent.Flow;
 
 public class Functions extends JPanel {
 
@@ -39,13 +44,48 @@ public class Functions extends JPanel {
 
     private void initButtons()
     {
-        AppButton button1 = new AppButton();
-        button1.setText("Button 1");
-        add(button1);
+        initHoistTierFreqButton();
 
         AppButton button2 = new AppButton();
-        button2.setText("Button 2");
+        button2.setText("Move Catalog");
         add(button2);
+    }
+
+    private void initHoistTierFreqButton()
+    {
+        JPanel hoistTierFreqPanel = new JPanel();
+        hoistTierFreqPanel.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+
+        AppButton hoistTierFreqButton = new AppButton();
+        hoistTierFreqButton.setText("Hoist Tier Frequency");
+        hoistTierFreqButton.setFontSize(25);
+        hoistTierFreqButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(app.getPartialACT() == null){
+                    new HoistTier(app.getFullACT());
+                }
+                else{ new HoistTier(app.getPartialACT()); }
+            }
+        });
+
+        AppButton hoistTierFreqSettingsButton = new AppButton();
+        hoistTierFreqSettingsButton.setText("Settings");
+        hoistTierFreqSettingsButton.setFontSize(25);
+        hoistTierFreqSettingsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new HoistTierSettings();
+            }
+        });
+
+        c.ipady = 190;
+        c.ipadx = 132;
+        hoistTierFreqPanel.add(hoistTierFreqButton, c);
+        c.ipadx = 50;
+        hoistTierFreqPanel.add(hoistTierFreqSettingsButton, c);
+        add(hoistTierFreqPanel);
     }
 
 }
