@@ -43,6 +43,9 @@ public class TierPanel extends JPanel {
     {
         JLabel tierLabel = new JLabel();
         tierLabel.setText("Tier " + (rank + 3) + ": " + tier.size());
+        if((rank + 3) >= 7){
+            tierLabel.setText("   N/A: " + tier.size());
+        }
         tierLabel.setFont(new Inconsolata().getFont(30));
         tierLabel.setBackground(AppColors.BACKGROUND);
         tierLabel.setForeground(AppColors.BORDER);

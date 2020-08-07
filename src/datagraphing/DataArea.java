@@ -122,6 +122,14 @@ public class DataArea extends JTextPane {
         str.append(ctb.getDuration() + "s\n");
         str.append("\n");
 
+        str.append("GA Motion\n");
+        str.append(data[5] + "s\n");
+        str.append("Hoist Motion\n");
+        str.append(data[6] + "s\n");
+        str.append("Trolley Motion\n");
+        str.append(data[7] + "s\n");
+        str.append("\n");
+
         str.append("Desk Waiting\n");
         str.append(data[1] + "s\n");
         str.append("FLS Scan Waiting\n");
@@ -134,14 +142,6 @@ public class DataArea extends JTextPane {
         str.append(data[4] + "s\n");
         str.append("RCS RCOS Enabled\n");
         str.append(data[8] + "s\n");
-        str.append("\n");
-
-        str.append("GA Motion\n");
-        str.append(data[5] + "s\n");
-        str.append("Hoist Motion\n");
-        str.append(data[6] + "s\n");
-        str.append("Trolley Motion\n");
-        str.append(data[7] + "s\n");
         str.append("\n");
 
         try{

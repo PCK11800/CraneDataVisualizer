@@ -35,7 +35,7 @@ public class Functions extends JPanel {
         initButtons();
 
         //setBorder(BorderFactory.createLineBorder(AppColors.BORDER, 1));
-        setLayout(new GridLayout(2, 1));
+        setLayout(new GridLayout(2, 0));
         setBounds(720, 290, PANEL_WIDTH, PANEL_HEIGHT);
         setBackground(AppColors.BACKGROUND);
 
