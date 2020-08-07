@@ -38,13 +38,6 @@ public class HoistTierCalculator {
         calculate();
     }
 
-    public void setBounds(double bound1, double bound2, double bound3)
-    {
-        this.bound1 = bound1;
-        this.bound2 = bound2;
-        this.bound3 = bound3;
-    }
-
     private void calculate()
     {
         tiers[0] = new ArrayList<>();

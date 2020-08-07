@@ -17,7 +17,6 @@ public class TierPanel extends JPanel {
     private int rank;
     private TierNumberArea tierNumberArea;
 
-
     public TierPanel(JPanel tierDataPanel, ArrayList<String> tier, int rank, TierNumberArea tierNumberArea)
     {
         this.tierDataPanel = tierDataPanel;
@@ -63,10 +62,10 @@ public class TierPanel extends JPanel {
         showTiersButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                tierNumberArea.getTierDataArea().setText("");
+                tierNumberArea.getTierNumberArea().setText("");
                 for(String str : tier)
                 {
-                    tierNumberArea.getTierDataArea().append(str + " ");
+                    tierNumberArea.getTierNumberArea().append(str + " ");
                 }
             }
         });

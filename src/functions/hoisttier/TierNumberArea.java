@@ -10,7 +10,7 @@ import java.awt.*;
 public class TierNumberArea extends JPanel {
 
     private JFrame hoistTier;
-    private JTextArea tierDataArea;
+    private JTextArea tierNumberArea;
     private JScrollPane scrollPane;
 
     private int PANEL_WIDTH = 350;
@@ -25,7 +25,7 @@ public class TierNumberArea extends JPanel {
 
     private void initUI()
     {
-        initTierDataArea();
+        initTierNumberArea();
         initScrollPane();
 
         setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
@@ -34,23 +34,23 @@ public class TierNumberArea extends JPanel {
         //setBorder(BorderFactory.createLineBorder(AppColors.BORDER, 1));
     }
 
-    private void initTierDataArea()
+    private void initTierNumberArea()
     {
-        tierDataArea = new JTextArea();
-        tierDataArea.setEditable(false);
-        tierDataArea.setBounds(10, 10, PANEL_WIDTH, PANEL_HEIGHT);
-        tierDataArea.setFont(new Inconsolata().getFont(18));
-        tierDataArea.setForeground(AppColors.BORDER);
-        tierDataArea.setBackground(AppColors.BACKGROUND);
-        tierDataArea.setSelectedTextColor(AppColors.BACKGROUND);
-        tierDataArea.setSelectionColor(AppColors.BORDER);
-        tierDataArea.setLineWrap(true);
-        tierDataArea.setWrapStyleWord(true);
+        tierNumberArea = new JTextArea();
+        tierNumberArea.setEditable(false);
+        tierNumberArea.setBounds(10, 10, PANEL_WIDTH, PANEL_HEIGHT);
+        tierNumberArea.setFont(new Inconsolata().getFont(18));
+        tierNumberArea.setForeground(AppColors.BORDER);
+        tierNumberArea.setBackground(AppColors.BACKGROUND);
+        tierNumberArea.setSelectedTextColor(AppColors.BACKGROUND);
+        tierNumberArea.setSelectionColor(AppColors.BORDER);
+        tierNumberArea.setLineWrap(true);
+        tierNumberArea.setWrapStyleWord(true);
     }
 
     private void initScrollPane()
     {
-        scrollPane = new JScrollPane(tierDataArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane = new JScrollPane(tierNumberArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT - 15));
         scrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(5,1));
         scrollPane.getVerticalScrollBar().setBackground(AppColors.BACKGROUND);
@@ -83,8 +83,8 @@ public class TierNumberArea extends JPanel {
         add(scrollPane);
     }
 
-    public JTextArea getTierDataArea()
+    public JTextArea getTierNumberArea()
     {
-        return tierDataArea;
+        return tierNumberArea;
     }
 }

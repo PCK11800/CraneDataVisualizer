@@ -2,6 +2,7 @@ package userinterface.components;
 
 import functions.hoisttier.HoistTier;
 import functions.hoisttier.HoistTierSettings;
+import functions.movecatalog.MoveCatalog;
 import userinterface.AppColors;
 import userinterface.Application;
 
@@ -45,10 +46,7 @@ public class Functions extends JPanel {
     private void initButtons()
     {
         initHoistTierFreqButton();
-
-        AppButton button2 = new AppButton();
-        button2.setText("Move Catalog");
-        add(button2);
+        initMoveCatalogButton();
     }
 
     private void initHoistTierFreqButton()
@@ -86,6 +84,24 @@ public class Functions extends JPanel {
         c.ipadx = 50;
         hoistTierFreqPanel.add(hoistTierFreqSettingsButton, c);
         add(hoistTierFreqPanel);
+    }
+
+    private void initMoveCatalogButton()
+    {
+        AppButton moveCatalogButton = new AppButton();
+        moveCatalogButton.setText("Move Catalog");
+        moveCatalogButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(app.getPartialACT() == null){
+                    new MoveCatalog(app.getFullACT());
+                }
+                else{
+                    new MoveCatalog(app.getPartialACT());
+                }
+            }
+        });
+        add(moveCatalogButton);
     }
 
 }
