@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class HoistTierCalculator {
 
     private ActiveCycleTimes act = null;
-    private ArrayList<String>[] tiers = new ArrayList[5];
+    private ArrayList<CycleTimeBlock>[] tiers = new ArrayList[5];
 
     /*
      * Yes, static variables. Scary shit.
@@ -51,19 +51,19 @@ public class HoistTierCalculator {
             double height = getMaxHeightWhile_NoMI_Locked_Movement(ctb);
 
             if(height >= 0 && height < bound1) {
-                tiers[0].add(ctb.getBlockName());
+                tiers[0].add(ctb);
             }
             else if(height >= bound1 && height < bound2) {
-                tiers[1].add(ctb.getBlockName());
+                tiers[1].add(ctb);
             }
             else if(height >= bound2 && height < bound3) {
-                tiers[2].add(ctb.getBlockName());
+                tiers[2].add(ctb);
             }
             else if(height >= bound3) {
-                tiers[3].add(ctb.getBlockName());
+                tiers[3].add(ctb);
             }
             else{
-                tiers[4].add(ctb.getBlockName());
+                tiers[4].add(ctb);
             }
         }
     }
@@ -96,7 +96,7 @@ public class HoistTierCalculator {
         }
     }
 
-    public ArrayList<String>[] getTiers()
+    public ArrayList<CycleTimeBlock>[] getTiers()
     {
         return tiers;
     }

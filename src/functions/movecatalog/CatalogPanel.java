@@ -91,12 +91,39 @@ public class CatalogPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 catalogNumberArea.getCatalogNumberArea().setText("");
+                StringBuilder row = new StringBuilder();
+                int firstColumnLength = 9; int secondColumnLength = 12; int thirdColumnLength = 11;
+                row.append("|= Cycle =|=== Date ===|= Time(s) =|\n");
                 for(CycleTimeBlock ctb : moveCatalog)
                 {
-                    catalogNumberArea.getCatalogNumberArea().append(ctb.getBlockName() + " ");
+                    row.append(constructRow(firstColumnLength, ctb.getBlockName(), false));
+                    row.append(constructRow(secondColumnLength, ctb.getDate(), false));
+                    row.append(constructRow(thirdColumnLength, Double.toString(ctb.getDuration()), true));
                 }
+                row.append("|=========|============|===========|");
+                catalogNumberArea.getCatalogNumberArea().append(row.toString());
             }
         });
         add(showCatalogButton);
+    }
+
+    private String constructRow(int columnLength, String input, boolean last)
+    {
+        int inputLength = input.length();
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("|");
+        for(int i = 0; i <= (columnLength - inputLength); i++){
+            if(i == (columnLength - inputLength) / 2){
+                stringBuilder.append(input);
+            }
+            else{
+                stringBuilder.append(" ");
+            }
+        }
+        if(last){
+            stringBuilder.append("| \n");
+        }
+        return stringBuilder.toString();
     }
 }

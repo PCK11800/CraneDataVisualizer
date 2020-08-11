@@ -1,6 +1,7 @@
 package functions.hoisttier;
 
 import dataextraction.datacomponents.ActiveCycleTimes;
+import dataextraction.datacomponents.CycleTimeBlock;
 import userinterface.AppColors;
 import userinterface.OSCheck;
 
@@ -13,7 +14,7 @@ public class HoistTier extends JFrame {
     private int APP_WIDTH = 720;
     private int APP_HEIGHT = 720;
     private ActiveCycleTimes act;
-    private ArrayList<String>[] tiers;
+    private ArrayList<CycleTimeBlock>[] tiers;
     private TierNumberArea tierNumberArea;
     private TierDataArea tierDataArea;
 

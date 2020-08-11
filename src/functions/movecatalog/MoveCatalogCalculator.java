@@ -26,7 +26,6 @@ public class MoveCatalogCalculator {
     {
         this.act = act;
         calculate();
-        print();
     }
 
     private void calculate()
