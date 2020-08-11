@@ -47,36 +47,42 @@ public class CatalogPanel extends JPanel {
         {
             case 0:
                 data.append("FSTLM Loading: " + moveCatalog.size() + "\n");
-                data.append("Avg Time: " + MoveCatalogCalculator.getAverageTime(moveCatalog) + "s");
+                data.append("Avg Time: " + MoveCatalogCalculator.getAverageTime(moveCatalog) + "s\n");
+                data.append("Gantry Avg Time: " + MoveCatalogCalculator.getGantryAverageTime(moveCatalog) + "s");
                 break;
             case 1:
                 data.append("FSTLM Offloading: " + moveCatalog.size() + "\n");
-                data.append("Avg Time: " + MoveCatalogCalculator.getAverageTime(moveCatalog) + "s");
+                data.append("Avg Time: " + MoveCatalogCalculator.getAverageTime(moveCatalog) + "s\n");
+                data.append("Gantry Avg Time: " + MoveCatalogCalculator.getGantryAverageTime(moveCatalog) + "s");
                 break;
             case 2:
                 data.append("ASTLM Loading: " + moveCatalog.size() + "\n");
-                data.append("Avg Time: " + MoveCatalogCalculator.getAverageTime(moveCatalog) + "s");
+                data.append("Avg Time: " + MoveCatalogCalculator.getAverageTime(moveCatalog) + "s\n");
+                data.append("Gantry Avg Time: " + MoveCatalogCalculator.getGantryAverageTime(moveCatalog) + "s");
                 break;
             case 3:
                 data.append("ASTLM Offloading: " + moveCatalog.size() + "\n");
-                data.append("Avg Time: " + MoveCatalogCalculator.getAverageTime(moveCatalog) + "s");
+                data.append("Avg Time: " + MoveCatalogCalculator.getAverageTime(moveCatalog) + "s\n");
+                data.append("Gantry Avg Time: " + MoveCatalogCalculator.getGantryAverageTime(moveCatalog) + "s");
                 break;
             case 4:
                 data.append("Shuffling: " + moveCatalog.size() + "\n");
-                data.append("Avg Time: " + MoveCatalogCalculator.getAverageTime(moveCatalog) + "s");
+                data.append("Avg Time: " + MoveCatalogCalculator.getAverageTime(moveCatalog) + "s\n");
+                data.append("Gantry Avg Time: " + MoveCatalogCalculator.getGantryAverageTime(moveCatalog) + "s");
                 break;
             case 5:
                 data.append("N/A: " + moveCatalog.size() + "\n");
-                data.append("Avg Time: " + MoveCatalogCalculator.getAverageTime(moveCatalog) + "s");
+                data.append("Avg Time: " + MoveCatalogCalculator.getAverageTime(moveCatalog) + "s\n");
+                data.append("Gantry Avg Time: " + MoveCatalogCalculator.getGantryAverageTime(moveCatalog) + "s");
                 break;
         }
-        data.setFont(new Inconsolata().getFont(20));
+        data.setFont(new Inconsolata().getFont(18));
         data.setBackground(AppColors.BACKGROUND);
         data.setForeground(AppColors.BORDER);
         data.setEditable(false);
         data.setSelectedTextColor(AppColors.BACKGROUND);
         data.setSelectionColor(AppColors.BORDER);
-        data.setBounds(10, 30, 220, 50);
+        data.setBounds(10, 30, 220, 80);
         add(data);
     }
 

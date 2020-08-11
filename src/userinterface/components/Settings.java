@@ -1,6 +1,5 @@
 package userinterface.components;
 
-import dataextraction.CSVConverter;
 import dataextraction.DataExtractor;
 import dataextraction.DataFilter;
 import datagraphing.Graph;
@@ -76,18 +75,10 @@ public class Settings extends JPanel {
                 return;
             }
             String fileName = chooser.getSelectedFile().getName();
-            if(fileName.endsWith(".xlsx"))
+            if(fileName.endsWith(".csv"))
             {
                 DataExtractor dE = new DataExtractor();
                 dE.run(file);
-                app.setFullACT(dE.getFullACT());
-                app.screenview.printData();
-            }
-            else if(fileName.endsWith(".csv"))
-            {
-                CSVConverter converter = new CSVConverter(file);
-                DataExtractor dE = new DataExtractor();
-                dE.run(converter.getOutputFile());
                 app.setFullACT(dE.getFullACT());
                 app.screenview.printData();
             }

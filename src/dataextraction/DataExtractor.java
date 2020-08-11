@@ -1,15 +1,17 @@
 package dataextraction;
 
-import com.github.greycode.xlsx.StreamingReader;
 import dataextraction.datacomponents.ActiveCycleTimes;
 import dataextraction.datacomponents.CycleTimeBlock;
 import dataextraction.datacomponents.CycleTimeRow;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -26,37 +28,30 @@ public class DataExtractor {
 
     public void run(File file)
     {
-        loadWorkbook(file);
+        loadCSV(file);
     }
 
-    private void loadWorkbook(File file) {
+    private void loadCSV(File file) {
         try {
-            FileInputStream fis = new FileInputStream(file);
-
-            Workbook workbook = StreamingReader.builder()
-                    .rowCacheSize(100)
-                    .bufferSize(4096)
-                    .open(fis);
-
-            extractData(workbook);
-            fis.close();
+            Reader reader = Files.newBufferedReader(Paths.get(file.getPath()));
+            CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT
+                    .withDelimiter(';')
+            );
+            extractData(csvParser);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void extractData(Workbook workbook)
+    private void extractData(CSVParser csvParser)
     {
-        //Load only the first sheet
-        Sheet sheet = workbook.getSheetAt(0);
-
         boolean firstRow = true;
 
         //Toggles for when jobActive = 1
         boolean inBetween = false;
         CycleTimeBlock ctb = null;
 
-        for(Row r : sheet)
+        for(CSVRecord record : csvParser)
         {
             if(firstRow) //Ignore first row - the headers
             {
@@ -64,7 +59,7 @@ public class DataExtractor {
             }
             else
             {
-                CycleTimeRow ctr = loadRowData(r);
+                CycleTimeRow ctr = loadRowData(record);
                 if(ctr.getJobActive() == 1 && !inBetween) //Start of CycleTimeBlock
                 {
                     inBetween = true;
@@ -88,101 +83,34 @@ public class DataExtractor {
         }
     }
 
-    private CycleTimeRow loadRowData(Row r)
+    private CycleTimeRow loadRowData(CSVRecord record)
     {
         CycleTimeRow ctr = new CycleTimeRow();
-        Iterator<Cell> cellIterator = r.cellIterator();
-        SimpleDateFormat format;
 
-        int columnNumber = 1;
-        while(cellIterator.hasNext())
-        {
-            Cell cell = cellIterator.next();
-            switch(columnNumber)
-            {
-                case 1: // Relative Number
-                    ctr.setRelativeNumber(cell.getNumericCellValue());
-                    break;
-                case 2: // Date
-                    ctr.setDate(cell.getStringCellValue());
-                    break;
-                case 3: // Time
-                    format = new SimpleDateFormat("HH:mm:ss.SSS");
-                    String time = null;
+        ctr.setRelativeNumber(Double.parseDouble(record.get(0)));
+        ctr.setDate(record.get(1));
+        ctr.setTime(record.get(2));
+        ctr.setCraneMasterStatus(Double.parseDouble(record.get(3)));
+        ctr.setMIActive(Double.parseDouble(record.get(4)));
+        ctr.setRCOSIntervention(Double.parseDouble(record.get(5)));
+        ctr.setRCSControl(Double.parseDouble(record.get(6)));
+        ctr.setJobActive(Double.parseDouble(record.get(7)));
+        ctr.setSpreaderLock(Double.parseDouble(record.get(8)));
+        ctr.setSpreaderUnlock(Double.parseDouble(record.get(9)));
+        ctr.setTrolleyPosition(Double.parseDouble(record.get(10)));
+        ctr.setTrolleySpeed(Double.parseDouble(record.get(11)));
+        ctr.setHoistPosition(Double.parseDouble(record.get(12)));
+        ctr.setHoistSpeed(Double.parseDouble(record.get(13)));
+        ctr.setGantryPosition(Double.parseDouble(record.get(14)));
+        ctr.setGantrySpeed(Double.parseDouble(record.get(15)));
+        ctr.setFLSActivate(Double.parseDouble(record.get(16)));
+        ctr.setLCPSActivate(Double.parseDouble(record.get(17)));
+        ctr.setSPMSActivate(Double.parseDouble(record.get(18)));
+        ctr.setTPSColdRestart(Double.parseDouble(record.get(19)));
+        ctr.setTPSPositioning(Double.parseDouble(record.get(20)));
+        ctr.setCTDSActivate(Double.parseDouble(record.get(21)));
+        ctr.setATIDSState(Double.parseDouble(record.get(22)));
 
-                    if(cell.getCellType().equals(CellType.STRING)){
-                        time = cell.getStringCellValue();
-                    }
-                    else if(cell.getCellType().equals(CellType.NUMERIC)){
-                        if(DateUtil.isCellDateFormatted(cell)){
-                            time = format.format(cell.getDateCellValue());
-                        }
-                    }
-                    ctr.setTime(time);
-                    break;
-                case 4: // Crane Master Status
-                    ctr.setCraneMasterStatus(cell.getNumericCellValue());
-                    break;
-                case 5: // MI Active
-                    ctr.setMIActive(cell.getNumericCellValue());
-                    break;
-                case 6: // Intervention to RCOS
-                    ctr.setRCOSIntervention(cell.getNumericCellValue());
-                    break;
-                case 7: // RCS Control Enable
-                    ctr.setRCSControl(cell.getNumericCellValue());
-                    break;
-                case 8: // Job Active
-                    ctr.setJobActive(cell.getNumericCellValue());
-                    break;
-                case 9: // Spreader Lock
-                    ctr.setSpreaderLock(cell.getNumericCellValue());
-                    break;
-                case 10: // Spreader Unlock
-                    ctr.setSpreaderUnlock(cell.getNumericCellValue());
-                    break;
-                case 11: // Trolley Position
-                    ctr.setTrolleyPosition(cell.getNumericCellValue());
-                    break;
-                case 12: // Trolley Speed
-                    ctr.setTrolleySpeed(cell.getNumericCellValue());
-                    break;
-                case 13: // Hoist Position
-                    ctr.setHoistPosition(cell.getNumericCellValue());
-                    break;
-                case 14: // Hoist Speed
-                    ctr.setHoistSpeed(cell.getNumericCellValue());
-                    break;
-                case 15: // Gantry Position
-                    ctr.setGantryPosition(cell.getNumericCellValue());
-                    break;
-                case 16: // Gantry Speed
-                    ctr.setGantrySpeed(cell.getNumericCellValue());
-                    break;
-                case 17: // FLS Activate
-                    ctr.setFLSActivate(cell.getNumericCellValue());
-                    break;
-                case 18: // LCPS Activate
-                    ctr.setLCPSActivate(cell.getNumericCellValue());
-                    break;
-                case 19: // SPMS Activate
-                    ctr.setSPMSActivate(cell.getNumericCellValue());
-                    break;
-                case 20: // TPS Cold Restart
-                    ctr.setTPSColdRestart(cell.getNumericCellValue());
-                    break;
-                case 21: // TPS Positioning
-                    ctr.setTPSPositioning(cell.getNumericCellValue());
-                    break;
-                case 22: // CTDS Activate
-                    ctr.setCTDSActivate(cell.getNumericCellValue());
-                    break;
-                case 23: // ATIDS State
-                    ctr.setATIDSState(cell.getNumericCellValue());
-                    break;
-            }
-            columnNumber++;
-        }
         return ctr;
     }
 

@@ -125,6 +125,33 @@ public class MoveCatalogCalculator {
         return averageTime;
     }
 
+    public static double getGantryAverageTime(ActiveCycleTimes moveCatalog)
+    {
+        double totalTime = 0;
+        double averageTime = 0;
+
+        for(CycleTimeBlock ctb : moveCatalog)
+        {
+            int jobActive = 0;
+            int gaMotion = 0;
+            for(CycleTimeRow ctr : ctb)
+            {
+                jobActive++;
+                if(ctr.getGantrySpeed() != 0) {
+                    gaMotion++;
+                }
+            }
+            double divideBy = ctb.getDuration() / jobActive;
+            totalTime = totalTime + (double) Math.round((gaMotion * divideBy) * 100) / 100;
+        }
+
+        if (!(totalTime <= 0)) {
+            averageTime = totalTime / moveCatalog.size();
+            averageTime = round(averageTime, 2);
+        }
+        return averageTime;
+    }
+
     private static double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
 
