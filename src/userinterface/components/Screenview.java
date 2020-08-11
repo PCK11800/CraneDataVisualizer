@@ -95,12 +95,14 @@ public class Screenview extends JPanel {
 
     private void initTextAreaExampleText()
     {
-        textArea.setText("Lorem ipsum dolor sit amet, " +
-                "consectetur adipiscing elit, " +
-                "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, " +
-                "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " +
-                "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur." +
-                " Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
+        textArea.setText("This application takes a .xlsx sheet of cycle time raw data and " +
+                "outputs charts visualizing the data. \n" +
+                "\n" +
+                "Instructions:" +
+                "\n" +
+                "1. Open a .xlsx file containing cycle time raw data. \n" +
+                "2. Wait for program to load file. \n" +
+                "3. Enter cycle time and hit preview to generate a chart.");
 
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);

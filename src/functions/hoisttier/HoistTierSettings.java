@@ -22,11 +22,6 @@ public class HoistTierSettings extends JFrame {
     {
         initUI();
         setVisible(true);
-        /*
-        HoistTierCalculator.bound1 = 0;
-        HoistTierCalculator.bound2 = 10;
-        HoistTierCalculator.bound3 = 20;
-         */
     }
 
     private void initUI()
@@ -36,15 +31,15 @@ public class HoistTierSettings extends JFrame {
         getContentPane().setLayout(new GridLayout(2, 0));
         setResizable(false);
 
+        initSettingsArea();
+        initInstructionsArea();
+
         if(OSCheck.getOS().equals("WIN"))
         {
             APP_WIDTH = APP_WIDTH + 20;
             APP_HEIGHT = APP_HEIGHT + 45;
         }
         setPreferredSize(new Dimension(APP_WIDTH, APP_HEIGHT));
-
-        initSettingsArea();
-        initInstructionsArea();
 
         pack();
         repaint();

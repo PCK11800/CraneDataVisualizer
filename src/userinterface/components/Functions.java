@@ -3,6 +3,7 @@ package userinterface.components;
 import functions.hoisttier.HoistTier;
 import functions.hoisttier.HoistTierSettings;
 import functions.movecatalog.MoveCatalog;
+import functions.movecatalog.MoveCatalogSettings;
 import userinterface.AppColors;
 import userinterface.Application;
 
@@ -88,8 +89,13 @@ public class Functions extends JPanel {
 
     private void initMoveCatalogButton()
     {
+        JPanel moveCatalogPanel = new JPanel();
+        moveCatalogPanel.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+
         AppButton moveCatalogButton = new AppButton();
         moveCatalogButton.setText("Move Catalog");
+        moveCatalogButton.setFontSize(25);
         moveCatalogButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -102,6 +108,22 @@ public class Functions extends JPanel {
             }
         });
         add(moveCatalogButton);
-    }
 
+        AppButton moveCatalogSettingsButton = new AppButton();
+        moveCatalogSettingsButton.setText("Settings");
+        moveCatalogSettingsButton.setFontSize(25);
+        moveCatalogSettingsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new MoveCatalogSettings();
+            }
+        });
+
+        c.ipady = 180;
+        c.ipadx = 236;
+        moveCatalogPanel.add(moveCatalogButton, c);
+        c.ipadx = 50;
+        moveCatalogPanel.add(moveCatalogSettingsButton, c);
+        add(moveCatalogPanel);
+    }
 }
