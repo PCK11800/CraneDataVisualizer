@@ -6,6 +6,8 @@ import dataextraction.datacomponents.CycleTimeRow;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.util.StringUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,6 +38,8 @@ public class DataExtractor {
             Reader reader = Files.newBufferedReader(Paths.get(file.getPath()));
             CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT
                     .withDelimiter(';')
+                    .withIgnoreSurroundingSpaces()
+                    .withNullString("")
             );
             extractData(csvParser);
         } catch (IOException e) {
@@ -59,28 +63,44 @@ public class DataExtractor {
             }
             else
             {
-                CycleTimeRow ctr = loadRowData(record);
-                if(ctr.getJobActive() == 1 && !inBetween) //Start of CycleTimeBlock
-                {
-                    inBetween = true;
-                    ctb = new CycleTimeBlock();
-                    ctb.setName(Integer.toString(fullACT.size() + 1));
-                    ctb.add(ctr);
-                }
-                if(ctr.getJobActive() == 1 && inBetween) //Middle of CycleTimeBlock
-                {
-                    ctb.add(ctr);
-                }
-                if(ctr.getJobActive() == 0 && inBetween) //End of CycleTimeBlock
-                {
-                    ctb.add(ctr);
-                    ctb.setDuration(getDuration(ctb.get(0).getDate(), ctb.getLast().getDate(), ctb.get(0).getTime(), ctb.getLast().getTime()));
-                    inBetween = false;
-                    fullACT.add(ctb);
-                    ctb = null; //Flush ctb - just in case
+                if(!checkIfContainsEmptyString(record)){
+                    CycleTimeRow ctr = loadRowData(record);
+                    if(ctr.getJobActive() == 1 && !inBetween) //Start of CycleTimeBlock
+                    {
+                        inBetween = true;
+                        ctb = new CycleTimeBlock();
+                        ctb.setName(Integer.toString(fullACT.size() + 1));
+                        ctb.add(ctr);
+                    }
+                    if(ctr.getJobActive() == 1 && inBetween) //Middle of CycleTimeBlock
+                    {
+                        ctb.add(ctr);
+                    }
+                    if(ctr.getJobActive() == 0 && inBetween) //End of CycleTimeBlock
+                    {
+                        ctb.add(ctr);
+                        ctb.setDuration(getDuration(ctb.get(0).getDate(), ctb.getLast().getDate(), ctb.get(0).getTime(), ctb.getLast().getTime()));
+                        inBetween = false;
+                        fullACT.add(ctb);
+                        ctb = null; //Flush ctb - just in case
+                    }
                 }
             }
         }
+    }
+
+    private boolean checkIfContainsEmptyString(CSVRecord record)
+    {
+        boolean containsEmpty = false;
+        for(int i = 0; i < 22; i++)
+        {
+            if(StringUtils.isEmpty(record.get(i)))
+            {
+                containsEmpty = true;
+                break;
+            }
+        }
+        return containsEmpty;
     }
 
     private CycleTimeRow loadRowData(CSVRecord record)
