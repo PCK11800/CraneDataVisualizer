@@ -13,7 +13,8 @@ import java.util.stream.Collectors;
 public class MoveCatalogCalculator {
 
     private ActiveCycleTimes act;
-    public static int trolleyPositionBound = 37030;
+    public static int foreSideTrolleyPositionBound = 37030;
+    public static int aftSideTrolleyPositionBound = 0;
 
     private ActiveCycleTimes foreSideLoadingJobMoves = new ActiveCycleTimes();
     private ActiveCycleTimes foreSideOffloadingJobMoves = new ActiveCycleTimes();
@@ -54,9 +55,9 @@ public class MoveCatalogCalculator {
             // If lock happens within bounds and unlock happens in "zone", then it's a loading job
             if(lockRow != null && unlockRow != null){
 
-                if(unlockRow.getTrolleyPosition() <= trolleyPositionBound && unlockRow.getTrolleyPosition() >= 0)
+                if(unlockRow.getTrolleyPosition() <= foreSideTrolleyPositionBound && unlockRow.getTrolleyPosition() >= aftSideTrolleyPositionBound)
                 {
-                    if(lockRow.getTrolleyPosition() > trolleyPositionBound){
+                    if(lockRow.getTrolleyPosition() > foreSideTrolleyPositionBound){
                         foreSideOffloadingJobMoves.add(ctb);
                     }
                     else if(lockRow.getTrolleyPosition() < 0){
@@ -64,9 +65,9 @@ public class MoveCatalogCalculator {
                     }
                 }
 
-                if(lockRow.getTrolleyPosition() <= trolleyPositionBound && lockRow.getTrolleyPosition() >= 0)
+                if(lockRow.getTrolleyPosition() <= foreSideTrolleyPositionBound && lockRow.getTrolleyPosition() >= aftSideTrolleyPositionBound)
                 {
-                    if(unlockRow.getTrolleyPosition() > trolleyPositionBound){
+                    if(unlockRow.getTrolleyPosition() > foreSideTrolleyPositionBound){
                         foreSideLoadingJobMoves.add(ctb);
                     }
                     else if(unlockRow.getTrolleyPosition() < 0){
@@ -74,8 +75,8 @@ public class MoveCatalogCalculator {
                     }
                 }
 
-                if(lockRow.getTrolleyPosition() <= trolleyPositionBound && lockRow.getTrolleyPosition() >= 0
-                && unlockRow.getTrolleyPosition() <= trolleyPositionBound && unlockRow.getTrolleyPosition() >= 0){
+                if(lockRow.getTrolleyPosition() <= foreSideTrolleyPositionBound && lockRow.getTrolleyPosition() >= aftSideTrolleyPositionBound
+                && unlockRow.getTrolleyPosition() <= foreSideTrolleyPositionBound && unlockRow.getTrolleyPosition() >= aftSideTrolleyPositionBound){
                     shuffles.add(ctb);
                 }
             }
